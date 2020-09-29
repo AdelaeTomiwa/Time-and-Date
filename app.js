@@ -2,7 +2,11 @@
 const time = document.querySelector('.time');
 const date = document.querySelector('.date');
 
-function showTime() {
+const setAmPm = true;
+
+function displayTime() {
+   // let currentTime = new Date(2012, 06, 10, 13, 33, 30);
+
    var currentTime = new Date();
    var currentHour = currentTime.getHours();
    var currentMins = currentTime.getMinutes();
@@ -11,25 +15,28 @@ function showTime() {
    var currentYear = currentTime.getFullYear();
    var currentMonth = currentTime.getMonth();
 
+   // Check if it is AM or PM
+   const amPm = currentHour <= 12 ? 'AM' : 'PM';
+
    // Change Format to 12
    currentHour = currentHour % 12 || 12;
 
    time.innerHTML = `
       ${currentHour}<span>:</span>${addZero(currentMins)}<span>:<span>${addZero(
       currentSec
-   )}
+   )} ${setAmPm ? amPm : ''}
    `;
 
    date.innerHTML = `
          ${currentMonth}<span>/</span>${currentDate}<span>/<span>${currentYear}
    `;
 
-   setTimeout(showTime, 1000);
+   setTimeout(displayTime, 1000);
 }
 
-function addZero(n) {
-   return (parseInt(n, 10) < 10 ? '0' : '') + n;
+function addZero(number) {
+   return (parseInt(number, 10) < 10 ? '0' : '') + number;
 }
 
 // Run Function
-showTime();
+displayTime();
